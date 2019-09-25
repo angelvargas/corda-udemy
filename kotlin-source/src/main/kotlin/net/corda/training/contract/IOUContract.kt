@@ -1,5 +1,5 @@
 package net.corda.training.contract
-
+import net.corda.core.contracts.*
 import net.corda.core.contracts.CommandData
 import net.corda.core.contracts.Contract
 import net.corda.core.contracts.requireSingleCommand
@@ -22,9 +22,10 @@ class IOUContract : Contract {
      * function to check for a number of commands which implement this interface.
      */
     interface Commands : CommandData {
+        class Issue : TypeOnlyCommandData(), CommandData
         // Add commands here.
         // E.g
-        // class DoSomething : TypeOnlyCommandData(), Commands
+        // class DoSomething : TypeOnlyCommandData(), CommandData
     }
 
     /**
@@ -32,6 +33,7 @@ class IOUContract : Contract {
      * The constraints are self documenting so don't require any additional explanation.
      */
     override fun verify(tx: LedgerTransaction) {
+        tx.commands.requireSingleCommand<Commands.Issue>()
         // Add contract code here.
         // requireThat {
         //     ...
