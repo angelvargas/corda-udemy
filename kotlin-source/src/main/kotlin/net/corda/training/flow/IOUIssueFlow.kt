@@ -48,6 +48,8 @@ class IOUIssueFlow(val state: IOUState) : FlowLogic<SignedTransaction>() {
         val stx = subFlow( CollectSignaturesFlow(ptx, sessions) );
         //It will return a [SignedTransaction] with all the required signatures
         //The subflow performs the signature checking and transaction verification for you
+        //Now we need to store the finished [SignedTransaction] in both counter-party vaults.
+        //TODO: Amend the [IOUIssueFlow] by adding a call to [FinalityFlow].
         return subFlow(FinalityFlow(stx, sessions));
     }
 }
