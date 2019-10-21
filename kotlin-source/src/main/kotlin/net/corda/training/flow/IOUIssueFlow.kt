@@ -41,6 +41,8 @@ class IOUIssueFlow(val state: IOUState) : FlowLogic<SignedTransaction>() {
         builder.addOutputState(state);
         //Extra credit: use [TransactionBuilder.withItems] to create the transaction instead
         builder.withItems();
+        //TODO: Amend the [IOUIssueFlow] to verify the transaction as well as sign it.
+        builder.verify(serviceHub);
         //Sign the transaction and convert it to a [SignedTransaction] using the [serviceHub.signInitialTransaction] method.
         //Return the [SignedTransaction].
         return serviceHub.signInitialTransaction(builder);
