@@ -138,17 +138,17 @@ class IOUIssueFlowTests {
      * Using this flow you abstract away all the back-and-forth communication required for parties to sign a
      * transaction.
      */
-//    @Test
-//    fun flowReturnsTransactionSignedByBothParties() {
-//        val lender = a.info.chooseIdentityAndCert().party
-//        val borrower = b.info.chooseIdentityAndCert().party
-//        val iou = IOUState(10.POUNDS, lender, borrower)
-//        val flow = IOUIssueFlow(iou)
-//        val future = a.startFlow(flow)
-//        mockNetwork.runNetwork()
-//        val stx = future.getOrThrow()
-//        stx.verifyRequiredSignatures()
-//    }
+    @Test
+    fun flowReturnsTransactionSignedByBothParties() {
+        val lender = a.info.chooseIdentityAndCert().party
+        val borrower = b.info.chooseIdentityAndCert().party
+        val iou = IOUState(10.POUNDS, lender, borrower)
+        val flow = IOUIssueFlow(iou)
+        val future = a.startFlow(flow)
+        mockNetwork.runNetwork()
+        val stx = future.getOrThrow()
+        stx.verifyRequiredSignatures()
+    }
 
     /**
      * Task 4.
